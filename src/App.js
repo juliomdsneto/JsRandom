@@ -1,103 +1,133 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";//alá, apelou
 
-const CIRCLE_SIZE = 85;
 
-const DragBox = () => {
-  const [state, setState] = useState({
-    hasCapture: false,
-    circleLeft: 80,
-    circleTop: 150,
-    isDragging: false,
-    previousLeft: 0,
-    previousTop: 0,
-  })
+export default function App() {
+  const [drag, setDrag] = useState({
+    active: false,
+    x: "",
+    y: ""
+  });
+
+  const [dims, setDims] = useState({
+    w: 200,
+    h: 200
+  });
+
+  const [boxForm, setBoxForm] = useState({
+    width: `${dims.w}px`,
+    height: `${dims.h}px`,
+    backgroundColor: "red"
+  });
+
+const teste = {
+  width: `${dims.w}px`,
+    height: `${dims.h}px`,
+    backgroundColor: "red"
+}
 
 
-
-  const [circleStyle, setCircleStyle] = useState({
-    width: CIRCLE_SIZE,
-    height: CIRCLE_SIZE,
-    borderRadius: CIRCLE_SIZE / 5,
-    position: "absolute",
-    left: state?.circleLeft,
-    top: state?.circleTop,
-    backgroundColor: state?.hasCapture ? "black" : "green"
-  })
-  const [boxStyle, setBoxStyle] = useState({
-    border: "1px solid #444444",
-    margin: "10px 0 20px",
-    minHeight: 400,
-    width: "100%",
-    position: "relative"
-  })
-  // tu ta colocando ? pq o movimento nao é obrigatorio?
-  // o que isso aqui faz exatamente?     const { hasCapture, circleLeft, circleTop } = state;
-  //é um obj isso?
-  const onDown = event => {
-    setState({ ...state, isDragging: true });
-    event.target.setPointerCapture(event.pointerId);
-    //qual era o problema antes?
-
-    extractPositionDelta(event);
+  const startResize = (e) => {
+    setDrag({
+      active: true,
+      x: e.clientX,
+      y: e.clientY
+    });
   };
 
-  const onMove = event => {
-    console.log(event)
-    if (!state.isDragging) {
-      return;
+  const resizeFrame = (e) => {
+    const { active, x, y } = drag;
+    if (active) {
+      const xDiff = Math.abs(x - e.clientX);
+      const yDiff = Math.abs(y - e.clientY);
+      const newW = x > e.clientX ? dims.w - xDiff : dims.w + xDiff;
+      const newH = y > e.clientY ? dims.h + yDiff : dims.h - yDiff;
+
+      setDrag({ ...drag, x: e.clientX, y: e.clientY });
+      setDims({ w: newW, h: newH });
     }
-    const { left, top } = extractPositionDelta(event);
-
-    setState(({ ...state, circleLeft: circleLeft + left, 
-      circleTop: circleTop + top }))
   };
 
-  const onUp = event => setState({ ...state, isDragging: false });
-  const onGotCapture = event => setState({ ...state, hasCapture: true });
-  const onLostCapture = event => setState({ ...state, hasCapture: false });
-
-  const extractPositionDelta = event => {
-    const left = event.clientX;
-    const top = event.clientY;
-    const delta = {
-      left: left - state.previousLeft,
-      top: top - state.previousTop
-    };
-    setState({ ...state, previousLeft: left, previousTop: top })
-    return delta;
+  const stopResize = (e) => {
+    setDrag({ ...drag, active: false });
   };
 
-  const  { hasCapture, circleLeft, circleTop } = state;
-  // aloo 
-
-  useEffect(() => {
-    setCircleStyle({
-      width: CIRCLE_SIZE,
-      height: CIRCLE_SIZE,
-      borderRadius: CIRCLE_SIZE / 5,
-      position: "absolute",
-      left: state?.circleLeft,
-      top: state?.circleTop,
-      backgroundColor: hasCapture ? "red" : "green"
-    })
-  }, [state])
- 
   return (
-    <div style={boxStyle}>
+    <div style={{
+      justifyContent: "center",
+      alignItems: "center",
+      height:"100vh",
+      display: "flex"
+    }} onMouseMove={resizeFrame} onMouseUp={stopResize}>
       <div
-        style={circleStyle}
-        touch-action="none"
-        onPointerDown={onDown }
-        onPointerMove={onMove}
-        onPointerUp={onUp}
-        onPointerCancel={onUp}
-        onGotPointerCapture={onGotCapture}
-        onLostPointerCapture={onLostCapture}
-      />
+        style={teste}
+      >
+        <button style={
+          {
+            cursor: "pointer",
+            border: "2p solid black",
+            float: "right",
+            margin: 0
+          }
+        }
+        onMouseDown={startResize}>
+         .
+        </button>
+        <button style={
+          {
+            cursor: "pointer",
+            border: "2p solid black",
+            float: "center",
+            margin: 0
+          }
+        }
+        onMouseDown={startResize}>
+         .
+        </button>
+
+        <button style={
+          {
+            cursor: "pointer",
+            border: "2p solid black",
+            float: "revert",
+            margin: 0
+          }
+        }
+        onMouseDown={startResize}>
+         .
+        </button>
+
+      </div>
     </div>
-  );// pq sem arrow agora?
+  );
+}
 
-}//nao é isso?
 
-export default DragBox
+// style = {
+//   {
+//     cursor: "pointer",
+//     border: "2p solid black",
+//     float: "center",
+//     margin: 0
+//   }
+// }
+
+
+// .container {
+//   display: flex;
+//   height: 100vh;
+//   justify-content: center;
+//   align-items: center;
+// }
+
+// .box {
+//   background-color: red;
+// }
+
+// display: "flex",
+// justifyContent: "center",
+// flex: 1,
+// backgroundColor: "green",
+// height: 100,
+// alignItems: "center"
+// }
