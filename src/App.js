@@ -1,73 +1,103 @@
-import { useState } from 'react'
-import ReactDOM from "react-dom";
+import React, { useState, useEffect } from "react";
+import ReactDOM from "react-dom";//alá, apelou
 
+const CIRCLE_SIZE = 85;
 
-const App = () => {
+const DragBox = () => {
   const [state, setState] = useState({
     hasCapture: false,
-    squareLeft: 80,
-    squareTop: 150
-  });
+    circleLeft: 80,
+    circleTop: 150,
+    isDragging: false,
+    previousLeft: 0,
+    previousTop: 0,
+  })
 
 
-  const [isDragging, setIsDragging] = useState(false)
-  const [previousLeft, setPreviousLeft] = useState(0)
-  const [previousTop, setPreviousTop] = useState(0)
-  const [mudacor, setMudacor] = useState('green')
-  const [estadoTrue, setEstadoTrue] = useState(true)
-  const [estadoFalse, setEstadoFalse] = useState(false)
+
+  const [circleStyle, setCircleStyle] = useState({
+    width: CIRCLE_SIZE,
+    height: CIRCLE_SIZE,
+    borderRadius: CIRCLE_SIZE / 5,
+    position: "absolute",
+    left: state?.circleLeft,
+    top: state?.circleTop,
+    backgroundColor: state?.hasCapture ? "black" : "green"
+  })
+  const [boxStyle, setBoxStyle] = useState({
+    border: "1px solid #444444",
+    margin: "10px 0 20px",
+    minHeight: 400,
+    width: "100%",
+    position: "relative"
+  })
+  // tu ta colocando ? pq o movimento nao é obrigatorio?
+  // o que isso aqui faz exatamente?     const { hasCapture, circleLeft, circleTop } = state;
+  //é um obj isso?
   const onDown = event => {
-    setIsDragging(true);
+    setState({ ...state, isDragging: true });
     event.target.setPointerCapture(event.pointerId);
+    //qual era o problema antes?
+
     extractPositionDelta(event);
   };
 
   const onMove = event => {
-    if (!isDragging) {
+    console.log(event)
+    if (!state.isDragging) {
       return;
     }
     const { left, top } = extractPositionDelta(event);
 
-    setState({ ...state, squareLeft: state.squareLeft + left, squareTop: state.squareTop + top })
+    setState(({ ...state, circleLeft: circleLeft + left, 
+      circleTop: circleTop + top }))
   };
-  const onGotCapture = event => setEstadoTrue({ hasCapture: true });
-  const onLostCapture = event => setEstadoFalse({ hasCapture: false });
 
-  const onUp = event => setIsDragging(false);
+  const onUp = event => setState({ ...state, isDragging: false });
+  const onGotCapture = event => setState({ ...state, hasCapture: true });
+  const onLostCapture = event => setState({ ...state, hasCapture: false });
 
   const extractPositionDelta = event => {
-    const left = event.pageX;
-    const top = event.pageY;
+    const left = event.clientX;
+    const top = event.clientY;
     const delta = {
-      left: left - previousLeft,
-      top: top - previousTop
+      left: left - state.previousLeft,
+      top: top - state.previousTop
     };
-    //atualizar state
-    setPreviousLeft(left);
-    setPreviousTop(top);
+    setState({ ...state, previousLeft: left, previousTop: top })
     return delta;
   };
-  return (
-    <div>
-      <div style={{
-        backgroundColor: mudacor,
-        width: '250px',
-        height: '250px',
-        borderColor: 'green',
-        top: state,
-        left: state
-      }}
 
+  const  { hasCapture, circleLeft, circleTop } = state;
+  // aloo 
+
+  useEffect(() => {
+    setCircleStyle({
+      width: CIRCLE_SIZE,
+      height: CIRCLE_SIZE,
+      borderRadius: CIRCLE_SIZE / 5,
+      position: "absolute",
+      left: state?.circleLeft,
+      top: state?.circleTop,
+      backgroundColor: hasCapture ? "red" : "green"
+    })
+  }, [state])
+ 
+  return (
+    <div style={boxStyle}>
+      <div
+        style={circleStyle}
         touch-action="none"
+        onPointerDown={onDown }
         onPointerMove={onMove}
         onPointerUp={onUp}
-        onPointerDown={onDown}
         onPointerCancel={onUp}
         onGotPointerCapture={onGotCapture}
         onLostPointerCapture={onLostCapture}
-      ></div>
+      />
     </div>
-  );
-}
+  );// pq sem arrow agora?
 
-export default App;
+}//nao é isso?
+
+export default DragBox
