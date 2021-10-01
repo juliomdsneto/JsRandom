@@ -14,17 +14,12 @@ export default function App() {
     h: 200
   });
 
-  const [boxForm, setBoxForm] = useState({
+
+  const boxForm = {
     width: `${dims.w}px`,
     height: `${dims.h}px`,
     backgroundColor: "red"
-  });
-
-const teste = {
-  width: `${dims.w}px`,
-    height: `${dims.h}px`,
-    backgroundColor: "red"
-}
+  }
 
 
   const startResize = (e) => {
@@ -56,46 +51,57 @@ const teste = {
     <div style={{
       justifyContent: "center",
       alignItems: "center",
-      height:"100vh",
+      height: "100vh",
       display: "flex"
     }} onMouseMove={resizeFrame} onMouseUp={stopResize}>
       <div
-        style={teste}
+        style={boxForm}
       >
         <button style={
           {
-            cursor: "pointer",
-            border: "2p solid black",
-            float: "right",
-            margin: 0
-          }
-        }
-        onMouseDown={startResize}>
-         .
-        </button>
-        <button style={
-          {
-            cursor: "pointer",
-            border: "2p solid black",
-            float: "center",
-            margin: 0
-          }
-        }
-        onMouseDown={startResize}>
-         .
-        </button>
 
-        <button style={
-          {
+            position: "relative",
+            left: -45,
+            top: -47,
             cursor: "pointer",
             border: "2p solid black",
-            float: "revert",
-            margin: 0
+            margin: 50
           }
         }
-        onMouseDown={startResize}>
-         .
+          onMouseDown={startResize}>
+          .
         </button>
+        {
+          <button style={
+            {
+              position: "relative",
+              right: -454,
+              top: -47,
+              cursor: "pointer",
+              border: "2p solid black",
+              margin: 50
+            }
+          }
+            onMouseDown={startResize}>
+            .
+          </button>
+        }
+
+        {
+          <button style={
+            {
+              position: "absolute",
+              left: 590,
+              top: 146,
+              cursor: "pointer",
+              border: "2p solid black",
+              margin: 50
+            }
+          }
+            onMouseDown={startResize}>
+            .
+          </button>
+        }
 
       </div>
     </div>
