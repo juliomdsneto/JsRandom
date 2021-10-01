@@ -37,8 +37,8 @@ export default function App() {
   const stopResize = (e) => {
     setDrag({ ...drag, active: false });
   };
-//resetar o css parar um borderBox
-//instalar styled component
+  //resetar o css. margin, padding e boxSizing
+  //instalar styled component
   return (
     <div style={{
       justifyContent: "center",
@@ -53,7 +53,7 @@ export default function App() {
           width: `${dims.w}px`,
           height: `${dims.h}px`,
           backgroundColor: "red",
-          position:"relative"
+          position: "relative"
         }}
       >
         <button style={
@@ -71,114 +71,114 @@ export default function App() {
           onMouseDown={startResize}>
           A
         </button>
-          <button style={
-            {
-              backgroundColor: 'black',
-              width: '15px',
-              height: '15px',
-              border: 'none',
-              position: "absolute",
-              right: 0,
-              top: 0,
-              cursor: "pointer",
-            }
-          }
-            onMouseDown={startResize}>
-            B
-          </button>
-          <button style={
-            {
-              backgroundColor: 'black',
-              width: '15px',
-              height: '15px',
-              border: 'none',
-              position: "absolute",
-              left: 0,
-              bottom: 0,
-              cursor: "pointer",
-            }
-          }
-            onMouseDown={startResize}>
-            C
-          </button>
-          <button style={
-            {
-              backgroundColor: 'black',
-              width: '15px',
-              height: '15px',
-              border: 'none',
-              position: "absolute",
-              right: 0,
-              bottom: 0,
-              cursor: "pointer",
-            }
-          }
-            onMouseDown={startResize}>
-            
-          </button>
-          <button style={
-            {
-              backgroundColor: 'black',
-              width: '15px',
-              height: '15px',
-              border: 'none',
-              position: "absolute",
-              right: 0,
-              bottom: "45%",
-              cursor: "pointer",
-            }
-          }
-            onMouseDown={startResize}>
-            
-          </button>
-          <button style={
-            {
-              backgroundColor: 'black',
-              width: '15px',
-              height: '15px',
-              border: 'none',
-              position: "absolute",
-              left: 0,
-              bottom: "45%",
-              cursor: "pointer",
-            }
-          }
-            onMouseDown={startResize}>
-            
-          </button>
-          <button style={
-            {
-              backgroundColor: 'black',
-              width: '15px',
-              height: '15px',
-              border: 'none',
-              position: "absolute",
-              right: "45%",
-              left:'45%',
-              bottom: 0,
-              cursor: "pointer",
-            }
-          }
-            onMouseDown={startResize}>
-            
-          </button>
-     
-          <button style={
-            {
-              backgroundColor: 'black',
+        <button style={
+          {
+            backgroundColor: 'black',
             width: '15px',
             height: '15px',
             border: 'none',
-              position: "absolute",
-              right: "45%",
-              left:'45%',
-              top: 0,
-              cursor: "pointer",
-            }
+            position: "absolute",
+            right: 0,
+            top: 0,
+            cursor: "pointer",
           }
-            onMouseDown={startResize}>
-            
-          </button>
+        }
+          onMouseDown={startResize}>
+          B
+        </button>
+        <button style={
+          {
+            backgroundColor: 'black',
+            width: '15px',
+            height: '15px',
+            border: 'none',
+            position: "absolute",
+            left: 0,
+            bottom: 0,
+            cursor: "pointer",
+          }
+        }
+          onMouseDown={startResize}>
+          C
+        </button>
+        <button style={
+          {
+            backgroundColor: 'black',
+            width: '15px',
+            height: '15px',
+            border: 'none',
+            position: "absolute",
+            right: 0,
+            bottom: 0,
+            cursor: "pointer",
+          }
+        }
+          onMouseDown={startResize}>
+
+        </button>
+        <button style={
+          {
+            backgroundColor: 'black',
+            width: '15px',
+            height: '15px',
+            border: 'none',
+            position: "absolute",
+            right: 0,
+            bottom: "45%",
+            cursor: "pointer",
+          }
+        }
+          onMouseDown={startResize}>
+
+        </button>
+        <button style={
+          {
+            backgroundColor: 'black',
+            width: '15px',
+            height: '15px',
+            border: 'none',
+            position: "absolute",
+            left: 0,
+            bottom: "45%",
+            cursor: "pointer",
+          }
+        }
+          onMouseDown={startResize}>
+
+        </button>
+        <button style={
+          {
+            backgroundColor: 'black',
+            width: '15px',
+            height: '15px',
+            border: 'none',
+            position: "absolute",
+            right: "45%",
+            left: '45%',
+            bottom: 0,
+            cursor: "pointer",
+          }
+        }
+          onMouseDown={startResize}>
+
+        </button>
+
+        <button style={
+          {
+            backgroundColor: 'black',
+            width: '15px',
+            height: '15px',
+            border: 'none',
+            position: "absolute",
+            right: "45%",
+            left: '45%',
+            top: 0,
+            cursor: "pointer",
+          }
+        }
+          onMouseDown={startResize}>
+
+        </button>
       </div>
     </div>
   );
