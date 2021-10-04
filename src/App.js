@@ -23,7 +23,7 @@ export default function App() {
 
   const resizeFrame = (e) => {
     const { active, x, y } = drag;
-    if (active) {//
+    if (active) {
       const xDiff = Math.abs(x - e.clientX);
       const yDiff = Math.abs(y - e.clientY);
       const newW = x > e.clientX ? dims.w - xDiff : dims.w + xDiff;
@@ -34,18 +34,31 @@ export default function App() {
     }
   };
 
+  const resizeBox = (e) => {
+    const { active, x, y } = drag;
+    if (active) {
+      const xDiff = Math.abs(x - e.clientX);
+      const yDiff = Math.abs(y - e.clientY);
+      const newW = x > e.clientX ? dims.w - xDiff : dims.w + xDiff;
+      const newH = y > e.clientY ? dims.h + yDiff : dims.h - yDiff;
+
+      setDrag({ ...drag, x: e.clientX, y: e.clientY });
+      setDims({ w: newW, h: newH });
+    }
+  };
+
+
+
   const stopResize = (e) => {
     setDrag({ ...drag, active: false });
   };
-  //resetar o css. margin, padding e boxSizing
-  //instalar styled component
   return (
     <div style={{
       justifyContent: "center",
       alignItems: "center",
       height: "100vh",
       display: "flex"
-    }} onMouseMove={resizeFrame} onMouseUp={stopResize}>
+    }} onMouseMove={resizeFrame} onMouseUp={stopResize} onMouseMove={resizeBox}>
       <div
         style={{
           minWidth: '200px',
@@ -58,7 +71,7 @@ export default function App() {
       >
         <button style={
           {
-            backgroundColor: 'black',
+            backgroundColor: 'green',
             width: '15px',
             height: '15px',
             border: 'none',
@@ -69,7 +82,7 @@ export default function App() {
           }
         }
           onMouseDown={startResize}>
-          A
+          
         </button>
         <button style={
           {
@@ -84,11 +97,11 @@ export default function App() {
           }
         }
           onMouseDown={startResize}>
-          B
+          
         </button>
         <button style={
           {
-            backgroundColor: 'black',
+            backgroundColor: 'blue',
             width: '15px',
             height: '15px',
             border: 'none',
@@ -98,8 +111,9 @@ export default function App() {
             cursor: "pointer",
           }
         }
-          onMouseDown={startResize}>
-          C
+        //resizeBox
+          onMouseDown={resizeBox}>
+          
         </button>
         <button style={
           {
@@ -133,7 +147,7 @@ export default function App() {
         </button>
         <button style={
           {
-            backgroundColor: 'black',
+            backgroundColor: 'green',
             width: '15px',
             height: '15px',
             border: 'none',
@@ -148,7 +162,7 @@ export default function App() {
         </button>
         <button style={
           {
-            backgroundColor: 'black',
+            backgroundColor: 'green',
             width: '15px',
             height: '15px',
             border: 'none',
@@ -183,5 +197,3 @@ export default function App() {
     </div>
   );
 }
-
-
