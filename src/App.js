@@ -39,8 +39,8 @@ export default function App() {
     if (active) {
       const xDiff = Math.abs(x - e.clientX);
       const yDiff = Math.abs(y - e.clientY);
-      const newW = x > e.clientX ? dims.w - xDiff : dims.w + xDiff;
-      const newH = y > e.clientY ? dims.h + yDiff : dims.h - yDiff;
+      const newW = x > e.clientX ? dims.w + xDiff : dims.w - xDiff;
+      const newH = y > e.clientY ? dims.h - yDiff : dims.h + yDiff;
 
       setDrag({ ...drag, x: e.clientX, y: e.clientY });
       setDims({ w: newW, h: newH });
@@ -71,7 +71,7 @@ export default function App() {
       >
         <button style={
           {
-            backgroundColor: 'green',
+            backgroundColor: 'white',
             width: '15px',
             height: '15px',
             border: 'none',
