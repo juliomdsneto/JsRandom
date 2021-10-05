@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 
 export default function App() {
+
+  const [color, setColor] = useState('green');
   const [drag, setDrag] = useState({
     active: false,
     x: "",
@@ -16,8 +18,9 @@ export default function App() {
   const startResize = (e) => {
     setDrag({
       active: true,
+
       x: e.clientX,
-      y: e.clientY
+      y: e.clientY,
     });
   };
 
@@ -31,22 +34,9 @@ export default function App() {
 
       setDrag({ ...drag, x: e.clientX, y: e.clientY });
       setDims({ w: newW, h: newH });
+
     }
   };
-
-  const resizeBox = (e) => {
-    const { active, x, y } = drag;
-    if (active) {
-      const xDiff = Math.abs(x - e.clientX);
-      const yDiff = Math.abs(y - e.clientY);
-      const newW = x > e.clientX ? dims.w + xDiff : dims.w - xDiff;
-      const newH = y > e.clientY ? dims.h - yDiff : dims.h + yDiff;
-
-      setDrag({ ...drag, x: e.clientX, y: e.clientY });
-      setDims({ w: newW, h: newH });
-    }
-  };
-
 
 
   const stopResize = (e) => {
@@ -58,7 +48,7 @@ export default function App() {
       alignItems: "center",
       height: "100vh",
       display: "flex"
-    }} onMouseMove={resizeFrame} onMouseUp={stopResize} onMouseMove={resizeBox}>
+    }} onMouseMove={resizeFrame} onMouseUp={stopResize}>
       <div
         style={{
           minWidth: '200px',
@@ -69,20 +59,22 @@ export default function App() {
           position: "relative"
         }}
       >
-        <button style={
-          {
-            backgroundColor: 'white',
-            width: '15px',
-            height: '15px',
-            border: 'none',
-            position: "absolute",
-            left: 0,
-            top: 0,
-            cursor: "pointer",
-          }
-        }
+        <button
+          style={
+            {
+              background: color,
+              width: '15px',
+              height: '15px',
+              border: 'none',
+              position: "absolute",
+              left: 0,
+              top: 0,
+              cursor: "pointer",
+            }
+          } className="teste"
+          onClick={() => { setColor("white") }}
           onMouseDown={startResize}>
-          
+
         </button>
         <button style={
           {
@@ -97,7 +89,7 @@ export default function App() {
           }
         }
           onMouseDown={startResize}>
-          
+
         </button>
         <button style={
           {
@@ -111,9 +103,9 @@ export default function App() {
             cursor: "pointer",
           }
         }
-        //resizeBox
-          onMouseDown={resizeBox}>
-          
+          //resizeBox
+          onMouseDown={startResize}>
+
         </button>
         <button style={
           {
