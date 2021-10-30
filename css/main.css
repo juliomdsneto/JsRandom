@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto:wght@100;400&display=swap');
+body {
+    background: #E30037;
+    font-family: 'Times New Roman', Times, serif;
+    color: white;
+}
+
+.container {
+    font-size: 25px;
+    padding-left: 25px;
+    display: flex;
+    align-items: center;
+}
+
+header .tela-inicial {
+    font-family: 'Roboto', sans-serif;
+    font-size: 25px;
+}
+
+.icone {
+    font-size: 8px;
+    font-family: 'Montserrat';
+}
+
+.tela-inicial .container {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 40px;
+    line-height: 42px;
+    color: #ffff;
+    position: absolute;
+    width: 600px;
+    height: 254px;
+    left: 144px;
+    top: 290px;
+}
+
+.item {
+    width: calc(100% - 160px);
+    padding: 0 80px 0 80px;
+}
+
+.my-container {
+    width: calc(100% - 164px);
+    position: relative;
+}
+
+.custom-arrow {
+    position: absolute;
+    top: 50%;
+    margin-top: -15px;
+}
+
+.custom-left-arrow {
+    left: 0;
+}
+
+.custom-right-arrow {
+    right: 0;
+}
+
+.fooBar {
+    max-width: 696px;
+}
+
+.texto {
+    font-size: 28px;
+    font-weight: 30;
+}
