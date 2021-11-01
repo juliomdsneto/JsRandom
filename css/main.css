@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto:wght@100;400&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+}
+
 body {
     background: #E30037;
     font-family: 'Times New Roman', Times, serif;
@@ -68,4 +73,52 @@ header .tela-inicial {
 .texto {
     font-size: 28px;
     font-weight: 30;
+}
+
+.sessaoUm {
+    height: 100vh;
+}
+
+.sessaoDois {
+    height: 100vh;
+    background: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.sessaoTres {
+    height: 100vh;
+    background: black;
+}
+
+.tamanho {
+    display: flex;
+    flex-direction: row;
+}
+
+.tamanho50 {
+    width: 50vw;
+    display: flex;
+    height: 50vh;
+}
+
+.tamanho50 img {
+    width: 100%;
+    height: 50vh;
+}
+
+.tamanho25 {
+    width: 25vw;
+    height: 50vh;
+}
+
+.tamanho50b {
+    width: 50vw;
+    display: flex;
+    height: 50vh;
+}
+
+.tamanho50b img {
+    width: 50%;
+    height: 50vh;
 }

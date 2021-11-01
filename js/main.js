@@ -16,4 +16,4 @@ $('.owl-carousel').owlCarousel({
 
 })
 
-//distnacia das arrows 696
+//distancia das arrows 696
